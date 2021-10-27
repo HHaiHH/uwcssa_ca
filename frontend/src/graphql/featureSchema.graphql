@@ -7,11 +7,25 @@ type User
       { allow: private, operations: [read] }
       { allow: public, operations: [read], provider: iam }
     ]
+  )
+  @key(
+    name: "userBySortKey"
+    fields: ["sortKey", "createdAt"]
+    queryField: "articleBySortKey"
   ) {
   id: ID!
   username: String!
   email: String!
   owner: String!
+  firstName: String
+  lastName: String
+  intro: String
+  major: String
+  avatarImgS3Key: String
+  backGroundImgS3Key: String
+  linkedIn: String
+  github: String
+  sortKey: SortKey!
   uWindsorEmail: String
     @auth(
       rules: [
@@ -21,14 +35,6 @@ type User
         { allow: public, operations: [read], provider: iam }
       ]
     )
-  firstName: String
-  lastName: String
-  intro: String
-  major: String
-  avatarImgS3Key: String
-  backGroundImgS3Key: String
-  linkedIn: String
-  github: String
   badges: [String]
     @auth(
       rules: [
